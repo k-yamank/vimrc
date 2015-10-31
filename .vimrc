@@ -4,8 +4,15 @@ set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
 set fileformats=unix,dos,mac
 set tabstop=4
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
-
-nnoremap <silent><C-q> :q!<CR>
+if has('mouse')
+	set mouse=a
+endif
+set cindent
+set whichwrap=b,s,h,l,<,>,[,]
+set number
+syntax on
+colorscheme jellybeans
+set t_Co=256
 
 "---------------------------
 " Start Neobundle Settings.
@@ -23,6 +30,9 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " NERDTreeを設定"
 NeoBundle 'scrooloose/nerdtree' 
 NeoBundle 'Townk/vim-autoclose'
+NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'tomasr/molokai'
+NeoBundle 'nanotech/jellybeans.vim'
 
 call neobundle#end()
 

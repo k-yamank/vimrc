@@ -7,12 +7,16 @@ nnoremap <silent><C-e> :NERDTreeToggle<CR>
 if has('mouse')
 	set mouse=a
 endif
-set cindent
 set whichwrap=b,s,h,l,<,>,[,]
 set number
+set cindent
 syntax on
 colorscheme jellybeans
 set t_Co=256
+
+let g:neocomplcache_enable_at_startup = 1
+inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
 "---------------------------
 " Start Neobundle Settings.
@@ -33,6 +37,7 @@ NeoBundle 'Townk/vim-autoclose'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'tomasr/molokai'
 NeoBundle 'nanotech/jellybeans.vim'
+" NeoBundle 'jiangmiao/simple-javascript-indenter'
 
 call neobundle#end()
 
@@ -46,3 +51,5 @@ NeoBundleCheck
 "-------------------------
 " End Neobundle Settings.
 "-------------------------
+
+

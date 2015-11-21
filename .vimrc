@@ -1,22 +1,46 @@
 
+set tabstop=4
+set shiftwidth=4
 set encoding=utf-8
 set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
-set fileformats=unix,dos,mac
-set tabstop=4
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 if has('mouse')
 	set mouse=a
 endif
 set whichwrap=b,s,h,l,<,>,[,]
 set number
-set cindent
 syntax on
 colorscheme jellybeans
 set t_Co=256
-
 let g:neocomplcache_enable_at_startup = 1
-inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : EscapeBraces()
+
+inoremap { {}<LEFT>
+inoremap ( ()<LEFT>
+inoremap < <><LEFT>
+inoremap " ""<LEFT>
+inoremap ' ''<LEFT>
+
+function! IndentBraces()
+	let nowletter = getline(".")[col(".")-1]
+	let beforeletter = getline(".")[col(".")-2]
+	if nowletter == "}" && beforeletter == "{"
+		return "\n\t\n\<UP>\<RIGHT>"
+	else
+		return "\n"
+	endif
+endfunction
+
+inoremap <silent><expr><CR> pumvisible() ? neocomplcache#close_popup() : IndentBraces()
+
+function! EscapeBraces()
+	let nowletter = getline(".")[col(".")-1]
+	if nowletter == ")" || nowletter == "\"" || nowletter == "'" || nowletter == ">"
+		return "\<RIGHT>"
+else
+		return "\t"
+	endif
+endfunction
 
 "---------------------------
 " Start Neobundle Settings.
@@ -25,6 +49,7 @@ inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 set runtimepath+=~/.vim/bundle/neobundle.vim/
  
 " Required:
+"
 call neobundle#begin(expand('~/.vim/bundle/'))
  
 " neobundle自体をneobundleで管理
@@ -33,7 +58,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " 今後このあたりに追加のプラグインをどんどん書いて行きます！！"
 " NERDTreeを設定"
 NeoBundle 'scrooloose/nerdtree' 
-NeoBundle 'Townk/vim-autoclose'
+" NeoBundle 'Townk/vim-autoclose'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'tomasr/molokai'
 NeoBundle 'nanotech/jellybeans.vim'

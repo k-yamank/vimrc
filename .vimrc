@@ -15,11 +15,14 @@ set t_Co=256
 let g:neocomplcache_enable_at_startup = 1
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : EscapeBraces()
 
+let g:user_emmet_leader_key = '<C-E>'
+
 inoremap { {}<LEFT>
 inoremap ( ()<LEFT>
 inoremap < <><LEFT>
 inoremap " ""<LEFT>
 inoremap ' ''<LEFT>
+inoremap [ []<LEFT>
 
 function! IndentBraces()
 	let nowletter = getline(".")[col(".")-1]
@@ -35,7 +38,7 @@ inoremap <silent><expr><CR> pumvisible() ? neocomplcache#close_popup() : IndentB
 
 function! EscapeBraces()
 	let nowletter = getline(".")[col(".")-1]
-	if nowletter == ")" || nowletter == "\"" || nowletter == "'" || nowletter == ">"
+	if nowletter == ")" || nowletter == "\"" || nowletter == "'" || nowletter == ">" || nowletter == "]" || nowletter == "}"
 		return "\<RIGHT>"
 else
 		return "\t"
@@ -60,9 +63,10 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'scrooloose/nerdtree' 
 " NeoBundle 'Townk/vim-autoclose'
 NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'tomasr/molokai'
+""NeoBundle 'tomasr/molokai'
 NeoBundle 'nanotech/jellybeans.vim'
 " NeoBundle 'jiangmiao/simple-javascript-indenter'
+NeoBundle 'mattn/emmet-vim'
 
 call neobundle#end()
 

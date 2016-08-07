@@ -2,7 +2,7 @@
 set tabstop=4
 set shiftwidth=4
 set encoding=utf-8
-set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
+set fileencodings=utf-8,iso-2022-jp
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 if has('mouse')
 	set mouse=a
